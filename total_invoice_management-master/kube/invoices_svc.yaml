@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - image: invoices_svc:v2
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         name: invoices-svc
         env:
           - name: EXPECTED_DATE_URI

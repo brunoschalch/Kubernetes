@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - image: auth_svc:v1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         name: auth-svc
         env:
         - name: TOKEN

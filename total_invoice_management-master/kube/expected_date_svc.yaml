@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - image: expected_date_svc:v1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         name: expected-date-svc
         ports:
         - containerPort: 8080
