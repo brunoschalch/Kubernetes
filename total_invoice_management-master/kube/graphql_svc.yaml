@@ -3,14 +3,14 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: invoices-svc
-  name: invoices-svc
+    run: graphql-svc
+  name: graphql-svc
   namespace: default
 spec:
   replicas: 3
   selector:
     matchLabels:
-      run: invoices-svc
+      run: graphql-svc
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -19,12 +19,12 @@ spec:
   template:
     metadata:
       labels:
-        run: invoices-svc
+        run: graphql-svc
     spec:
       containers:
-      - image: invoices_svc:v2
+      - image: graphql_svc:v2
         imagePullPolicy: Never
-        name: invoices-svc
+        name: graphql-svc
         env:
           - name: EXPECTED_DATE_URI
             value: http://expected-date-svc.default.svc.cluster.local
@@ -44,24 +44,24 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    run: invoices-svc
-  name: invoices-svc
+    run: graphql-svc
+  name: graphql-svc
   namespace: default
   annotations:
     getambassador.io/config: |
       ---
       apiVersion: ambassador/v0
       kind:  Mapping
-      name:  invoices-svc_mapping
-      prefix: /invoices/
-      rewrite: /api/invoices/
-      service: invoices-svc
+      name:  graphql-svc_mapping
+      prefix: /graphql/
+      rewrite: /api/graphql/
+      service: graphql-svc
 spec:
   ports:
   - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    run: invoices-svc
+    run: graphql-svc
   sessionAffinity: None
   type: ClusterIP

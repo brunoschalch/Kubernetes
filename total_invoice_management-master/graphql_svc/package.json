@@ -1,5 +1,5 @@
 {
-  "name": "invoices_svc",
+  "name": "graphql_svc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

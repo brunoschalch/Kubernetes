@@ -15,7 +15,7 @@ const addExpectedDate = async invoice => {
   }
 }
 
-app.get("/api/invoices/:id", async (req, res, next) => {
+app.get("/api/graphql/:id", async (req, res, next) => {
   try {
     const id = parseInt(req.params.id)
     const invoice = await addExpectedDate({
@@ -34,5 +34,5 @@ app.get("/api/invoices/:id", async (req, res, next) => {
 const port = process.env.PORT || 8080
 
 app.listen(port, () => {
-  console.log(`invoices_svc listening on ${port}`)
+  console.log(`graphql_svc listening on ${port}`)
 })

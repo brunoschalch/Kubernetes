@@ -3,12 +3,14 @@ tutorial: https://hackernoon.com/getting-started-with-microservices-and-kubernet
 
 minikube start
 
-opcional:
+opcional para ver si todo ok:
 kubectl get services -n kube-system
+
+opcional y util: minikube dashboard
 
 eval $(minikube docker-env)
 
-docker build -t invoices_svc:v2 ./invoices_svc
+docker build -t graphql_svc:v2 ./graphql_svc
 docker build -t auth_svc:v1 ./auth_svc
 docker build -t expected_date_svc:v1 ./expected_date_svc
 
@@ -16,9 +18,11 @@ kubectl apply -f ./kube
 
 minikube service ambassador --url
 
-// sustituir URL
-curl http://192.168.99.101:30509/invoices/42 -H 'authorization: letmeinpleasekthxbye'
+// sustituir IP
+curl http://192.168.99.101:30509/graphql/42 -H 'authorization: letmeinpleasekthxbye'
 
+
+al final, apagar con minikube stop o minikube delete
 
 tutorial graphql, para el servicio graphql_svc:
 
