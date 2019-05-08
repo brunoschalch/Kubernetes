@@ -1,0 +1,25 @@
+tutorial: https://hackernoon.com/getting-started-with-microservices-and-kubernetes-76354312b556
+
+
+minikube start
+
+opcional:
+kubectl get services -n kube-system
+
+eval $(minikube docker-env)
+
+docker build -t invoices_svc:v2 ./invoices_svc
+docker build -t auth_svc:v1 ./auth_svc
+docker build -t expected_date_svc:v1 ./expected_date_svc
+
+kubectl apply -f ./kube
+
+minikube service ambassador --url
+
+// sustituir URL
+curl http://192.168.99.101:30509/invoices/42 -H 'authorization: letmeinpleasekthxbye'
+
+
+tutorial graphql, para el servicio graphql_svc:
+
+https://medium.freecodecamp.org/a-beginners-guide-to-graphql-60e43b0a41f5
