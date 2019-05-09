@@ -1,0 +1,51 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: persistency-svc
+  name: persistency-svc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: persistency-svc
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: persistency-svc
+    spec:
+      containers:
+      - image: persistency_svc:v1
+        imagePullPolicy: Never
+        name: persistency-svc
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: persistency-svc
+  name: persistency-svc
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: persistency-svc
+  sessionAffinity: None
+  type: ClusterIP
