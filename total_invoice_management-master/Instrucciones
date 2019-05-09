@@ -13,6 +13,8 @@ eval $(minikube docker-env)
 docker build -t graphql_svc:v3 ./graphql_svc
 docker build -t auth_svc:v1 ./auth_svc
 docker build -t tequila_svc:v1 ./tequila_svc
+docker build -t producer_svc:v1 ./producer_svc
+docker build -t user_svc:v1 ./user_svc
 
 kubectl apply -f ./kube
 
@@ -21,7 +23,7 @@ opcional: kubectl get services
 minikube service ambassador --url
 
 // sustituir IP
-curl http://192.168.99.104:31635/graphql/42 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.107:30117/graphql/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 
 
