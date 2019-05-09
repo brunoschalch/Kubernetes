@@ -16,10 +16,13 @@ docker build -t expected_date_svc:v1 ./expected_date_svc
 
 kubectl apply -f ./kube
 
+opcional: kubectl get services
+
 minikube service ambassador --url
 
 // sustituir IP
-curl http://192.168.99.101:30509/graphql/42 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.102:30289/graphql/42 -H 'authorization: letmeinpleasekthxbye'
+// Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 
 
 al final, apagar con minikube stop o minikube delete
