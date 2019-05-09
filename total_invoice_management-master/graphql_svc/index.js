@@ -2,33 +2,60 @@ const express = require("express")
 const request = require("request-promise")
 
 const app = express()
-
-const addExpectedDate = async invoice => {
+/*
+const addExpectedDate = async tequila => {
   try {
-    const { expectedDate } = await request(`${process.env.EXPECTED_DATE_URI}/api/expected-date/${invoice.id}`, {
+    const { expectedDate } = await request(`${process.env.TEQUILA_SVC_URI}/api/tequila/${invoice.id}`, {
       json: true
     })
-    return Object.assign({}, invoice, { expectedDate })
+    return Object.assign({}, tequila, { expectedDate })
   } catch (e) {
     console.log(`failed to add expected date ${e}`)
     return invoice
   }
 }
+*/
 
 app.get("/api/graphql/:id", async (req, res, next) => {
   try {
     const id = parseInt(req.params.id)
-    const invoice = await addExpectedDate({
-      id: id,
-      ref: `INV-${id}`,
-      amount: id * 100,
-      balance: (id * 100) - 10,
-      ccy: "GBP"
+
+// get tequila with id
+    const tequila = {test: "hey"}
+
+    var options = {
+    uri: `${process.env.TEQUILA_SVC_URI}/api/tequila/${id}`,
+    json: true // Automatically parses the JSON string in the response
+};
+
+
+request(options)
+    .then(function (result) {
+      tequila = result
+          res.json(result)
     })
-    res.json(invoice)
+    .catch(function (err) {
+        // Crawling failed or Cheerio choked...
+        res.json({error: err})
+    });
+/*
+    try {
+      tequila = await request(`${process.env.TEQUILA_SVC_URI}/api/tequila/${id}`, {
+        json: true
+      })
+    //  return Object.assign({}, tequila, { expectedDate })
+    } catch (e) {
+      console.log(`failed to add expected date ${e}`)
+  //    return invoice
+    }
+    */
+
+
   } catch (error) {
     next(error)
   }
+
+
 })
 
 const port = process.env.PORT || 8080

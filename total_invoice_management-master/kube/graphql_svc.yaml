@@ -22,12 +22,12 @@ spec:
         run: graphql-svc
     spec:
       containers:
-      - image: graphql_svc:v2
+      - image: graphql_svc:v3
         imagePullPolicy: Never
         name: graphql-svc
         env:
-          - name: EXPECTED_DATE_URI
-            value: http://expected-date-svc.default.svc.cluster.local
+          - name: TEQUILA_SVC_URI
+            value: http://tequila-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           protocol: TCP
