@@ -7,7 +7,7 @@ metadata:
   name: graphql-svc
   namespace: default
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       run: graphql-svc
@@ -22,7 +22,7 @@ spec:
         run: graphql-svc
     spec:
       containers:
-      - image: graphql_svc:v3
+      - image: graphql_svc:v4
         imagePullPolicy: Never
         name: graphql-svc
         env:

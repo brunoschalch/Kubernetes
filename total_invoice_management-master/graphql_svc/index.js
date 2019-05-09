@@ -1,5 +1,7 @@
 const express = require("express")
-const request = require("request-promise")
+//const request = require("request-promise")
+const axios = require('axios');
+
 
 const app = express()
 /*
@@ -16,28 +18,31 @@ const addExpectedDate = async tequila => {
 }
 */
 
+const DEBUG = false;
+
 app.get("/api/graphql/:id", async (req, res, next) => {
   try {
     const id = parseInt(req.params.id)
 
-// get tequila with id
-    const tequila = {test: "hey"}
-
-    var options = {
-    uri: `${process.env.TEQUILA_SVC_URI}/api/tequila/${id}`,
-    json: true // Automatically parses the JSON string in the response
-};
+    if(DEBUG) {
+      process.env.TEQUILA_SVC_URI = 'http://localhost:8080'
+    }
 
 
-request(options)
-    .then(function (result) {
-      tequila = result
-          res.json(result)
-    })
-    .catch(function (err) {
-        // Crawling failed or Cheerio choked...
-        res.json({error: err})
-    });
+// Make a request for a user with a given ID
+axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
+  .then(function (response) {
+    // handle success
+    console.log(response);
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+    res.json(error)
+  })
+
+
 /*
     try {
       tequila = await request(`${process.env.TEQUILA_SVC_URI}/api/tequila/${id}`, {
@@ -58,7 +63,11 @@ request(options)
 
 })
 
-const port = process.env.PORT || 8080
+port = process.env.PORT || 8080
+
+if (DEBUG) {
+  port = 8081
+}
 
 app.listen(port, () => {
   console.log(`graphql_svc listening on ${port}`)
