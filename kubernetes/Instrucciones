@@ -15,6 +15,7 @@ docker build -t auth_svc:v1 ./auth_svc
 docker build -t tequila_svc:v1 ./tequila_svc
 docker build -t producer_svc:v1 ./producer_svc
 docker build -t user_svc:v1 ./user_svc
+docker build -t persistency_svc:v1 ./persistency_svc
 
 kubectl apply -f ./kube
 
