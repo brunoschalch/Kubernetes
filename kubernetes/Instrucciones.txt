@@ -20,7 +20,7 @@ http://192.168.99.109:31947/graphql/45
 (la parte de /api/ la agrega embassador, no quitarla de node!)
 
 En kubernetes, esto se prueba así, poniendo el header de autorización como una string token:
-curl http://192.168.99.109:31947/graphql/45 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.110:31288 -H 'authorization: letmeinpleasekthxbye'
 Todo se manda a través del servicio de auth por default.
 
 Para correr con Kubernetes:
@@ -43,8 +43,8 @@ eval $(minikube docker-env)
 
 3)
 docker build -t graphql_svc:v4 ./graphql_svc
-docker build -t auth_svc:v3 ./auth_svc
-docker build -t tequila_svc:v3 ./tequila_svc
+docker build -t auth_svc:v7 ./auth_svc
+docker build -t tequila_svc:v4 ./tequila_svc
 docker build -t producer_svc:v1 ./producer_svc
 docker build -t user_svc:v1 ./user_svc
 docker build -t persistency_svc:v1 ./persistency_svc
@@ -59,7 +59,7 @@ minikube service ambassador --url
 
 6)
 // sustituir IP del paso anterior.
-curl http://192.168.99.109:31947/graphql/45 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.111:32745/graphql/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 // FONT END: en lugar de curl, acá se hacen las requests.
 

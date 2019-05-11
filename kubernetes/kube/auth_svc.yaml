@@ -22,7 +22,7 @@ spec:
         run: auth-svc
     spec:
       containers:
-      - image: auth_svc:v3
+      - image: auth_svc:v7
         imagePullPolicy: Never
         name: auth-svc
         env:
