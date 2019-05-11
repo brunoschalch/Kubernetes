@@ -22,12 +22,14 @@ spec:
         run: auth-svc
     spec:
       containers:
-      - image: auth_svc:v1
+      - image: auth_svc:v3
         imagePullPolicy: Never
         name: auth-svc
         env:
         - name: TOKEN
           value: letmeinpleasekthxbye
+        - name: USER_SVC_URI
+          value: http://user-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           name: http-api
