@@ -1,0 +1,42 @@
+$darker: #012169;
+$white: #fff;
+
+.card {
+  width: 40%;
+  margin: 2% 30% 0% 30%;
+}
+
+.media {
+  max-width: 52%;
+  max-height: 70%;
+  margin-left: 25%;
+  height: 0%;
+  padding-top: 100%;
+}
+
+.actions {
+  display: 'flex';
+}
+
+.expand {
+  transform: rotate(0deg);
+  margin-left: 'auto';
+}
+
+.expandOpen {
+  transform: rotate(180deg);
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .card {
+    width: 65%;
+    margin: 3% 17.5% 7% 17.5%;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  .card {
+    width: 80%;
+    margin: 3% 10% 9% 10%;
+  }
+}

@@ -1,0 +1,58 @@
+{
+   "joe": [
+     {
+       "id": "101",
+       "f_compra": "30-04-2019",
+       "marca": "Don Julio",
+       "desc": "Con la planta de agave azul más fina y el tradicional proceso de destilación, el Tequila Don Julio® Blanco es la expresión más pura del verdadero tequila."
+     },
+     {
+       "id": "102",
+       "f_compra": "20-04-2019",
+       "marca": "Don Julio",
+       "desc": "Añejado en barricas de roble blanco americano durante ocho meses, el Tequila Don Julio® Reposado es de color ámbar dorado y ofrece una nota final intensa y suave, la esencia pura del perfecto tequila añejado en barrica."
+     },
+     {
+       "id": "103",
+       "f_compra": "30-04-2019",
+       "marca": "Don Julio",
+       "desc": "Don Julio 70 Añejo Cristalino es la culminación de 70 años de conocimiento, experiencia e innovación. Contiene la suavidad de un Blanco y la complejidad de un Añejo en una combinación perfecta para ofrecer una experiencia de tequila única"
+     },
+     {
+       "id": "104",
+       "f_compra": "30-04-2019",
+       "marca": "Cazadores",
+       "desc": "El tequila en su forma más pura, sin añejar, intenso y con el sabor real del agave. Las frutas cítricas, las hierbas aromáticas y el tradicional acabado suave, convierten el Tequila CAZADORES® Blanco en el tequila para cocteles y “caballito”"
+     },
+     {
+       "id": "105",
+       "f_compra": "20-04-2019",
+       "marca": "Cazadores",
+       "desc": "El Tequila CAZADORES® Reposado original se mantiene hasta un año en barricas nuevas de roble americano, creando un equilibrio perfecto entre el agave y los sabores amaderados."
+     },
+     {
+       "id": "106",
+       "f_compra": "30-04-2019",
+       "marca": "Cazadores",
+       "desc": "Cazadores Añejo Cristalino debe su brillantez y transparencia a su proceso de filtración lento y cuidadoso donde se remueve el color y se conservan las características de un tequila añejo."
+     },
+     {
+       "id": "107",
+       "f_compra": "30-04-2019",
+       "marca": "Corralejo",
+       "desc": "Tequila 100% de agave reposado, único producto de la familia Corralejo que se obtiene de la triple destilación de los mostos fermentados del agave azul Tequilana Weber, lo que lo hace ser un producto de gran pureza y excelente calidad."
+     },
+     {
+       "id": "108",
+       "f_compra": "20-04-2019",
+       "marca": "Corralejo",
+       "desc": "Tequila 100% de agave con 18 meses de maduración en barricas de roble americano, lo que le ha conferido una fusión exquisita entre sabores refrescantes combinados con suaves sabores a madera."
+     },
+     {
+       "id": "109",
+       "f_compra": "30-04-2019",
+       "marca": "Corralejo",
+       "desc": "Tequila 100% de agave, añejado durante 2 años en barricas de roble americano, un producto de gran excelencia que debe paladearse lentamente."
+     }
+   ]
+}

@@ -1,0 +1,56 @@
+$darker: #111;
+
+.container {
+  margin-top: 2%;
+  padding: 2% 2% 2% 2%;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  margin: 3% 35% 3% 35%;
+  width: 30%;
+
+  .user, .password, .serial, .button{
+    display: block;
+  }
+
+  .password {
+    width: 96%;
+  }
+
+  .button{
+    margin-top: 6%;
+    margin-left: 32%;
+    background-color: $darker;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .form {
+    margin: 3% 27.5% 3% 27.5%;
+    width: 45%;
+    .button{
+      margin-top: 8%;
+      margin-left: 40%;
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  .title {
+    .typo {
+      font-size: 200%;
+    }
+  }
+
+  .form {
+    margin: 5% 10% 5% 10%;
+    width: 80%;
+    .button {
+      margin-left: 38%;
+    }
+  }
+}

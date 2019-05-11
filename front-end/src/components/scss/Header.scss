@@ -1,0 +1,29 @@
+$darker: #111;
+
+.root {
+  flex-grow: 1;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.toolBar {
+  background-color: $darker;
+}
+
+.logo {
+  width: 5.2%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) {
+  .logo {
+    width: 8.8%;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) {
+  .logo {
+    width: 16.8%;
+  }
+}

@@ -1,0 +1,35 @@
+$darker: #111;
+$gray: #bfbfbf;
+
+.footer{
+  text-align: center;
+
+  .chips{
+    margin-top: 3%;
+    margin-left: 2%;
+    color: #fff;
+    background-color: $gray;
+  }
+
+  .names{
+    color: $darker;
+  }
+}
+
+@media screen and (min-width: 960px) { // Desktop
+  #des{
+    background-color: $darker;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 959px) { // Tablets
+  #tab{
+      background-color: $darker;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 599px) { // Mobile
+  #mob{
+    background-color: $darker;
+  }
+}
