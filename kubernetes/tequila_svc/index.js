@@ -1,19 +1,28 @@
 const express = require("express")
-const moment = require("moment")
-
+const axios = require('axios')
 const app = express()
 
 app.get("/api/tequila/:tequilaId", (req, res) => {
   const tequilaId = parseInt(req.params.tequilaId)
 
-  // ¯\_(ツ)_/¯
-//  const bump = Math.floor(Math.random() * 10) + 1
+//  res.json({
+//    works: "yeahh tequila service2"
+//  })
 
-//  const expectedDate = moment().add(bump, 'days').toISOString()
-
+// Make a request to read or store info!
+axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/dbread')
+.then(function (response) {
+  // handle success
   res.json({
-    works: "yeahh"
+    works: "yeahh tequila service",
+    responseFromPersistency: response.data
   })
+})
+.catch(function (error) {
+  // handle error
+  res.json(error)
+})
+
 })
 
 const port = process.env.PORT || 8080

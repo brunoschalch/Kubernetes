@@ -1,6 +1,7 @@
 tutorial: https://hackernoon.com/getting-started-with-microservices-and-kubernetes-76354312b556
 
 
+1)
 minikube start
 
 opcional para ver si todo ok:
@@ -8,26 +9,31 @@ kubectl get services -n kube-system
 
 opcional y util en otra pestaña: minikube dashboard
 
+2)
 eval $(minikube docker-env)
 
-docker build -t graphql_svc:v3 ./graphql_svc
+3)
+docker build -t graphql_svc:v4 ./graphql_svc
 docker build -t auth_svc:v1 ./auth_svc
-docker build -t tequila_svc:v1 ./tequila_svc
+docker build -t tequila_svc:v3 ./tequila_svc
 docker build -t producer_svc:v1 ./producer_svc
 docker build -t user_svc:v1 ./user_svc
 docker build -t persistency_svc:v1 ./persistency_svc
 
+4)
 kubectl apply -f ./kube
 
 opcional: kubectl get services
 
+5)
 minikube service ambassador --url
 
-// sustituir IP
-curl http://192.168.99.107:30117/graphql/45 -H 'authorization: letmeinpleasekthxbye'
+6)
+// sustituir IP del paso anterior
+curl http://192.168.99.109:31947/graphql/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 
-
+7)
 al final, apagar con minikube stop o minikube delete
 
 tutorial graphql, para el servicio graphql_svc:

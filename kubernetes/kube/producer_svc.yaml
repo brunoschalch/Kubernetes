@@ -25,6 +25,9 @@ spec:
       - image: producer_svc:v1
         imagePullPolicy: Never
         name: producer-svc
+        env:
+          - name: PERSISTENCY_SVC_URI
+            value: http://persistency-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           protocol: TCP

@@ -1,22 +1,6 @@
 const express = require("express")
-//const request = require("request-promise")
 const axios = require('axios');
-
-
 const app = express()
-/*
-const addExpectedDate = async tequila => {
-  try {
-    const { expectedDate } = await request(`${process.env.TEQUILA_SVC_URI}/api/tequila/${invoice.id}`, {
-      json: true
-    })
-    return Object.assign({}, tequila, { expectedDate })
-  } catch (e) {
-    console.log(`failed to add expected date ${e}`)
-    return invoice
-  }
-}
-*/
 
 const DEBUG = false;
 
@@ -42,24 +26,9 @@ axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
     res.json(error)
   })
 
-
-/*
-    try {
-      tequila = await request(`${process.env.TEQUILA_SVC_URI}/api/tequila/${id}`, {
-        json: true
-      })
-    //  return Object.assign({}, tequila, { expectedDate })
-    } catch (e) {
-      console.log(`failed to add expected date ${e}`)
-  //    return invoice
-    }
-    */
-
-
   } catch (error) {
     next(error)
   }
-
 
 })
 

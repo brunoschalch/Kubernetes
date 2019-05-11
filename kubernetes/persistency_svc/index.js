@@ -3,17 +3,15 @@ const moment = require("moment")
 
 const app = express()
 
-// gets producer
-app.get("/api/persistency/dbop", (req, res) => {
+// gets info specified in params
+app.get("/api/persistency/dbread", (req, res) => {
 //  const userId = parseInt(req.params.userId)
 
-  // ¯\_(ツ)_/¯
-//  const bump = Math.floor(Math.random() * 10) + 1
-
-//  const expectedDate = moment().add(bump, 'days').toISOString()
-
   res.json({
-    works: "yeahh persistency"
+    persistency_read: {
+      name: "herradura",
+      proucerID: "02334d",
+    }
   })
 })
 

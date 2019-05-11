@@ -22,9 +22,12 @@ spec:
         run: tequila-svc
     spec:
       containers:
-      - image: tequila_svc:v1
+      - image: tequila_svc:v4
         imagePullPolicy: Never
         name: tequila-svc
+        env:
+          - name: PERSISTENCY_SVC_URI
+            value: http://persistency-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           protocol: TCP
