@@ -2,7 +2,7 @@ const express = require("express")
 const axios = require('axios')
 const app = express()
 
-const DEVMODE = false;
+const DEVMODE = true;
 
 if(DEVMODE) {
   process.env.PORT = 8083
