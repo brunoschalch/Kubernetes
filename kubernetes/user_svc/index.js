@@ -1,6 +1,6 @@
 const express = require("express")
 const moment = require("moment")
-
+const axios = require('axios')
 const app = express()
 
 const DEVMODE = true;
@@ -17,7 +17,7 @@ if(DEVMODE) {
 
 // USER APIS start
 app.get("/api/user/:username", (req, res) => {
-  const username = parseInt(req.params.username)
+  const username = req.params.username
   axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/user/'+username)
   .then(function (response) {
     // handle success
@@ -31,7 +31,7 @@ app.get("/api/user/:username", (req, res) => {
 
 //usernameandpassword in format username:password
 app.get("/api/user/login/:usernameandpassword", (req, res) => {
-  const usernameandpassword = parseInt(req.params.usernameandpassword)
+  const usernameandpassword = req.params.usernameandpassword
   axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/userlogin/'+usernameandpassword)
   .then(function (response) {
     // handle success
