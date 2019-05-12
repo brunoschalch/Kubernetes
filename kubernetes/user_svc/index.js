@@ -3,7 +3,7 @@ const moment = require("moment")
 
 const app = express()
 
-const DEVMODE = false;
+const DEVMODE = true;
 
 if(DEVMODE) {
   process.env.PORT = 8085
@@ -15,7 +15,36 @@ if(DEVMODE) {
   process.env.AUTH_SVC_URI = 'http://localhost:8086'
 }
 
-// gets producer
+// USER APIS start
+app.get("/api/user/:username", (req, res) => {
+  const username = parseInt(req.params.username)
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/user/'+username)
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+//usernameandpassword in format username:password
+app.get("/api/user/login/:usernameandpassword", (req, res) => {
+  const usernameandpassword = parseInt(req.params.usernameandpassword)
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/userlogin/'+usernameandpassword)
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+/*
+// gets user
 app.get("/api/user/:userId", (req, res) => {
   const userId = parseInt(req.params.userId)
 
@@ -28,6 +57,7 @@ app.get("/api/user/:userId", (req, res) => {
     works: "yeahh user"
   })
 })
+*/
 
 const port = process.env.PORT || 8080
 

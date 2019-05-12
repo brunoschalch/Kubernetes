@@ -1,9 +1,13 @@
 const express = require("express")
 const moment = require("moment")
+var bodyParser = require("body-parser")
 
 const app = express()
 
-const DEVMODE = false;
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const DEVMODE = true;
 
 if(DEVMODE) {
   process.env.PORT = 8084
@@ -139,8 +143,11 @@ TequilaJSON = {
    ]
 }
 
-UsuarioJSON = {
-   "joe": [
+UsuarioJSON = [
+  {
+  "username": "joe",
+  "password": "password",
+   "tequilas": [
      {
        "id": "101",
        "f_compra": "30-04-2019",
@@ -196,7 +203,32 @@ UsuarioJSON = {
        "desc": "Tequila 100% de agave, añejado durante 2 años en barricas de roble americano, un producto de gran excelencia que debe paladearse lentamente."
      }
    ]
+},
+{
+"username": "bob",
+"password": "password",
+ "tequilas": [
+   {
+     "id": "107",
+     "f_compra": "30-04-2019",
+     "marca": "Corralejo",
+     "desc": "Tequila 100% de agave reposado, único producto de la familia Corralejo que se obtiene de la triple destilación de los mostos fermentados del agave azul Tequilana Weber, lo que lo hace ser un producto de gran pureza y excelente calidad."
+   },
+   {
+     "id": "108",
+     "f_compra": "20-04-2019",
+     "marca": "Corralejo",
+     "desc": "Tequila 100% de agave con 18 meses de maduración en barricas de roble americano, lo que le ha conferido una fusión exquisita entre sabores refrescantes combinados con suaves sabores a madera."
+   },
+   {
+     "id": "109",
+     "f_compra": "30-04-2019",
+     "marca": "Corralejo",
+     "desc": "Tequila 100% de agave, añejado durante 2 años en barricas de roble americano, un producto de gran excelencia que debe paladearse lentamente."
+   }
+ ]
 }
+]
 
 FabricanteJSON = {
    "results":[
@@ -222,8 +254,87 @@ FabricanteJSON = {
 }
 
 
+// TEQUILA APIS start
+app.get("/api/persistency/tequila/:tequilaId", (req, res) => {
+  const tequilaId = req.params.tequilaId
+  for (var i = 0; i< TequilaJSON.results.length; i++) {
+    let tequila = TequilaJSON.results[i];
+    if (tequila.id === tequilaId) {
+      res.json(tequila)
+    }
+  }
+  res.json({
+    persistency_error: 'tequila with id '+ tequilaId + ' not found.'
+  })
+})
+
+app.get("/api/persistency/tequilas", (req, res) => {
+  res.json(TequilaJSON.results)
+})
+
+app.post('/api/persistency/tequila', (req, res) => {
+  var tequilaToAdd = JSON.parse(req.body.tequilaToAdd)
+  TequilaJSON.results.push(tequilaToAdd);
+  res.json({success: true, message: 'tequila added', tequila: tequilaToAdd})
+});
+
+// PRODUCER APIS start
+app.get("/api/persistency/producer/:producerId", (req, res) => {
+  const producerId = req.params.producerId
+  for (var i = 0; i< FabricanteJSON.results.length; i++) {
+    let producer = FabricanteJSON.results[i];
+    if (producer.id === producerId) {
+      res.json(producer)
+    }
+  }
+  res.json({
+    persistency_error: 'producer with id '+ producerId + ' not found.'
+  })
+})
+
+app.get("/api/persistency/producers", (req, res) => {
+  res.json(FabricanteJSON.results)
+})
+
+app.post('/api/persistency/producer', (req, res) => {
+  var producerToAdd = JSON.parse(req.body.producerToAdd)
+  FabricanteJSON.results.push(producerToAdd);
+  res.json({success: true, message: 'producer added', producer: producerToAdd})
+});
+
+// USER APIS start
+app.get("/api/persistency/user/:username", (req, res) => {
+  const username = req.params.username
+  for (var i = 0; i < UsuarioJSON.length; i++) {
+    let user = UsuarioJSON[i];
+    if (user.username === username) {
+      res.json(user)
+    }
+  }
+  res.json({
+    persistency_error: 'user with username '+ username + ' not found.'
+  })
+})
+
+//usernameandpassword in format username:password
+app.get("/api/persistency/userlogin/:usernameandpassword", (req, res) => {
+  const usernameandpassword = req.params.usernameandpassword
+  const username = usernameandpassword.split(':')[0]
+  const password = usernameandpassword.split(':')[1]
+  for (var i = 0; i < UsuarioJSON.length; i++) {
+    let user = UsuarioJSON[i];
+    if (user.username === username && user.password === password) {
+      res.json(user)
+    }
+  }
+  res.json({
+    success: false,
+    persistency_error: 'user with username:password: '+ usernameandpassword + ' not found.'
+  })
+})
 
 
+/*
 // gets info specified in params
 app.get("/api/persistency/dbread", (req, res) => {
 //  const userId = parseInt(req.params.userId)
@@ -235,6 +346,7 @@ app.get("/api/persistency/dbread", (req, res) => {
     }
   })
 })
+*/
 
 const port = process.env.PORT || 8080
 
