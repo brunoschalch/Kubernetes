@@ -1,5 +1,6 @@
 const express = require("express")
-const axios = require('axios');
+const axios = require('axios')
+var jwt    = require('jsonwebtoken') // used to create, sign, and verify tokens
 const app = express()
 
 const DEVMODE = true;
@@ -32,50 +33,45 @@ function loginUser(loginInfo, callback) {
 
 app.use((req, res) => {
 
-  setTimeout(function () {
-
+  let token = req.get('authorization')
 // Check if token is valid
-  if (req.get('authorization') === process.env.TOKEN) {
-    res.json({
-      ok: true
-    })
-  //  next()
-  } else {
-    // esto del status 401 es lo que hace que la request se rechace.
-    // Maybe aqui checar si hay username y pass y si sí, regresar el token.
-    let usernameandpassword = req.get('authorization')
-    loginUser(usernameandpassword, (result) => {
-      console.log(result)
-      if (result.username && result.password) {
-        // User found! now generate token
-        res.status(401).json({
-          ok: false,
-          yourtoken: '2dfijsdfkjdfkEE45345435'
-        })
-      } else {
-        res.status(401).json({
-          ok: false,
+jwt.verify(token, 'superSecretBSG', function(err, decoded) {
+      if (err) {
+            // Maybe aqui checar si hay username y pass y si sí, regresar el token.
+            let usernameandpassword = req.get('authorization')
+            loginUser(usernameandpassword, (result) => {
+              console.log(result)
+              if (result.username && result.password) {
+                // User found! now generate token
+                var token = jwt.sign(result, 'superSecretBSG', {
+                  expiresIn: 60*60*12// expires in 12 hours
+                });
+
+                res.status(401).json({
+                  ok: false,
+                  yourtoken: token
+                })
+              } else {
+                res.status(401).json({
+                  ok: false,
+                })
+              }
+
+            })
+
+          }  else {
+        // if everything is good, save to request for use in other routes
+        console.log("Everything good with token, this info was inside (added to req.decoded):");
+        console.log(decoded);
+        req.decoded = decoded;
+        //important code for embassador to accept everything!
+        res.json({
+          ok: true
         })
       }
+    });
 
-    })
-    /*
-    if (req.get('authorization') === 'usuario:password') {
-      res.status(401).json({
-        ok: false,
-        yourtemptoken: '2dfijsdfkjdfkEE45345435'
-      })
-    //  next()
-    } else {
-      res.status(401).json({
-        ok: false,
-      })
-    //  next()
-    }
-    */
-  }
 
-}, 1000);
 
 })
 
