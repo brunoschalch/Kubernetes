@@ -11,12 +11,12 @@ Hacer DEVMODE = true.
 npm install y npm start
 
 el url para las requests es localhost:8080. Aquí va GraphQL.
-Probar con http://localhost:8080/api/graphql/23 por ejemplo.
+Probar con http://localhost:8080/api/graphql/tequila/23 por ejemplo.
 para probar cosas de la autenticación, se puede usar localhost:8086
 No se necesita acceder a ninguna otro endpoint directamente!
 
 Recordar que al final localhost se va a convertir en algo tipo:
-http://192.168.99.109:31947/graphql/45
+http://192.168.99.109:31947/graphql/tequila/45
 (la parte de /api/ la agrega embassador, no quitarla de node!)
 
 En kubernetes, esto se prueba así, poniendo el header de autorización como una string token:
@@ -59,7 +59,7 @@ minikube service ambassador --url
 
 6)
 // sustituir IP del paso anterior.
-curl http://192.168.99.111:32745/graphql/45 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.111:32745/graphql/tequila/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 // FONT END: en lugar de curl, acá se hacen las requests.
 

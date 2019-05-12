@@ -2,7 +2,7 @@ const express = require("express")
 const axios = require('axios')
 const app = express()
 
-const DEVMODE = false;
+const DEVMODE = true;
 
 if(DEVMODE) {
   process.env.PORT = 8083
@@ -14,6 +14,46 @@ if(DEVMODE) {
   process.env.AUTH_SVC_URI = 'http://localhost:8086'
 }
 
+// PRODUCER APIS start
+app.get("/api/producer/:producerId", (req, res) => {
+  const producerId = parseInt(req.params.producerId)
+  // Make a request to read info!
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/producer/'+producerId)
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+app.get("/api/producers", (req, res) => {
+  // Make a request to read info!
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/producers')
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+app.post('/api/producer', (req, res) => {
+  var producerToAdd = JSON.parse(req.body.producerToAdd)
+  axios.post(process.env.PERSISTENCY_SVC_URI+'/api/persistency/producer',
+  producerToAdd)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+});
+/*
 // gets producer
 app.get("/api/producer/:producerId", (req, res) => {
   const producerId = parseInt(req.params.producerId)
@@ -34,6 +74,7 @@ app.get("/api/producer/:producerId", (req, res) => {
 
 
 })
+*/
 
 const port = process.env.PORT || 8080
 
