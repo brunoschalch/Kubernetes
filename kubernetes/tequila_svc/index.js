@@ -14,6 +14,47 @@ if(DEVMODE) {
   process.env.AUTH_SVC_URI = 'http://localhost:8086'
 }
 
+// TEQUILA APIS start
+app.get("/api/tequila/:tequilaId", (req, res) => {
+  const tequilaId = parseInt(req.params.tequilaId)
+  // Make a request to read info!
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/tequila/'+tequilaId)
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+app.get("/api/tequilas", (req, res) => {
+  // Make a request to read info!
+  axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/tequilas')
+  .then(function (response) {
+    // handle success
+    res.json(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    res.json(error)
+  })
+})
+
+app.post('/api/tequila', (req, res) => {
+  var tequilaToAdd = JSON.parse(req.body.tequilaToAdd)
+  axios.post(process.env.PERSISTENCY_SVC_URI+'/api/persistency/tequila',
+  tequilaToAdd)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+});
+
+/*
 app.get("/api/tequila/:tequilaId", (req, res) => {
   const tequilaId = parseInt(req.params.tequilaId)
 
@@ -36,6 +77,7 @@ axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/dbread')
 })
 
 })
+*/
 
 const port = process.env.PORT || 8080
 

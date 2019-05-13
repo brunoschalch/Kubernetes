@@ -25,27 +25,7 @@ if(DEVMODE) {
   process.env.AUTH_SVC_URI = 'http://localhost:8086'
 }
 
-function getTequila(){
-  try{
-    axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/23')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-      //res.json(response.data)
-      return res.json(response.data);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-      res.json(error)
-    })
-    
 
-  }
-  catch(error){
-    //next(error);
-  }
-}
 
 var fabricantes = [
      {
@@ -177,23 +157,92 @@ console.log(getTequila());
 
 // Todas las rutas deben empezar con /api/graphql/. Fuera de eso no hay reglas.
 
+/*
 app.get("/api/graphql/:id", async (req, res, next) => {
   try {
     //const id = parseInt(req.params.id)
     const id = 23
+*/
 
 // Make a request for a user with a given ID
-axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
+//axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
+
+function getTequilaById(tequilaId, callback) {
+  axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+tequilaId)
   .then(function (response) {
     // handle success
-    console.log(response);
-    res.json(response.data)
+    callback(response.data)
   })
   .catch(function (error) {
     // handle error
-    console.log(error);
-    res.json(error)
+    callback(error)
   })
+}
+// Gets all tequilas in db
+function getTequilas(callback) {
+  axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
+  .then(function (response) {
+    // handle success
+    callback(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    callback(error)
+  })
+}
+function saveTequila(tequilaToAdd, callback) {
+  axios.post(process.env.TEQUILA_SVC_URI+'/api/tequila',
+  tequilaToAdd)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+function getProducerById(producerId, callback) {
+  axios.get(process.env.PRODUCER_SVC_URI+'/api/producer/'+producerId)
+  .then(function (response) {
+    // handle success
+    callback(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    callback(error)
+  })
+}
+// Gets all producers in db
+function getProducers(callback) {
+  axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')
+  .then(function (response) {
+    // handle success
+    callback(response.data)
+  })
+  .catch(function (error) {
+    // handle error
+    callback(error)
+  })
+}
+function saveProducer(producerToAdd, callback) {
+  axios.post(process.env.PRODUCER_SVC_URI+'/api/producer',
+  producerToAdd)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+// Todas las rutas deben empezar con /api/graphql/. Fuera de eso no hay reglas.
+app.get("/api/graphql/tequila/:id", async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id)
+
+    getTequilaById(id, (response) => {
+      res.json(response)
+    })
 
   } catch (error) {
     next(error)
