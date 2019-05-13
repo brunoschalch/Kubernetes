@@ -1,5 +1,6 @@
 const express = require("express");
 const graphqlHTTP = require('express-graphql');
+var cors = require('cors')
 const {
   GraphQLObjectType,
   GraphQLNonNull,
@@ -22,6 +23,28 @@ if(DEVMODE) {
   process.env.PERSISTENCY_SVC_URI = 'http://localhost:8084'
   process.env.USER_SVC_URI = 'http://localhost:8085'
   process.env.AUTH_SVC_URI = 'http://localhost:8086'
+}
+
+function getTequila(){
+  try{
+    axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/23')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+      //res.json(response.data)
+      return res.json(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+      res.json(error)
+    })
+    
+
+  }
+  catch(error){
+    //next(error);
+  }
 }
 
 var fabricantes = [
@@ -119,7 +142,8 @@ const QueryType = new GraphQLObjectType({
         type: new GraphQLList(TequilaType), // a list of users
         resolve: () => {
             //TODO: Return a list with all tequilas
-            return fabricantes;
+            
+            return this.getTequila();
         }
       },
       tequila: {
@@ -147,6 +171,7 @@ const schema = new GraphQLSchema({
 });
 
 
+console.log(getTequila()); 
 
 
 
@@ -178,7 +203,7 @@ axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
 
 
 
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', cors(),graphqlHTTP({
   schema,
   graphiql: true,
 }));
