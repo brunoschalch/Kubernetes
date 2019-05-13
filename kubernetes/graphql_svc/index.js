@@ -26,7 +26,7 @@ if(DEVMODE) {
 }
 
 
-
+/*
 var fabricantes = [
      {
         "id":"Don Julio",
@@ -47,6 +47,7 @@ var fabricantes = [
         "foto":"https://tequilacorralejo.mx/assets/base/img/home/slider/slider-corralejo-1.png"
      }
   ]
+*/
 
 // GraphQL Schema
 
@@ -98,8 +99,9 @@ const QueryType = new GraphQLObjectType({
   fields: {
       fabricantes: {
           type: new GraphQLList(FabricanteType), // a list of users
-          resolve: () => {
-              return fabricantes;
+          resolve: async () => {
+              var a = await getProducers();
+              return a;
           }
       },
       fabricante: {
@@ -151,7 +153,7 @@ const schema = new GraphQLSchema({
 });
 
 
-console.log(getTequila()); 
+
 
 
 
@@ -213,7 +215,12 @@ function getProducerById(producerId, callback) {
   })
 }
 // Gets all producers in db
-function getProducers(callback) {
+async function getProducers(callback) {
+  var response = await axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')
+  return response.data;
+}
+/*
+async function getProducers(callback) {
   axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')
   .then(function (response) {
     // handle success
@@ -224,6 +231,7 @@ function getProducers(callback) {
     callback(error)
   })
 }
+*/
 function saveProducer(producerToAdd, callback) {
   axios.post(process.env.PRODUCER_SVC_URI+'/api/producer',
   producerToAdd)
