@@ -26,28 +26,6 @@ if(DEVMODE) {
 }
 
 
-/*
-var fabricantes = [
-     {
-        "id":"Don Julio",
-        "desc":"En 1942222, la pasión por el tequila impulsó a nuestro fundador Don Julio González a mejorar cada aspecto de este tequila —desde la cosecha hasta el embotellado— para elaborar el tequila más prestigioso del mundo. Hecho 100% de Blue Weber Agave.",
-        "carac":"Guiado por su pasión, Don Julio González se inspiró para producir el tequila más fino revolucionando todo el proceso: desde la plantación y cosecha del agavetequilana Weber Variedad Azul hasta la forma de la botella.",
-        "foto":"https://www.donjulio.com/images/home_tequila_bottle.jpg"
-     },
-     {
-        "id":"Cazadores",
-        "desc":"En 1922, en Arandas, México, Don José María Bañuelos se asomó a su ventana y contempló las colinas plagadas de agave azul. Lo que vio, entre la arcilla roja y el agave azul, fue un ciervo, valientemente parado en medio del campo.",
-        "carac":"Se dice que después de que Don José perfeccionara su nuevo tequila Cazadores, ocultó la receta entre las paredes de su casa, salvaguardándola como su posesión más preciada. Durante 51 años, Cazadores ha permanecido como un secreto de familia.",
-        "foto":"https://d1oqiickzzpl3c.cloudfront.net/wp-content/uploads/2017/07/09120315/Painted-Wall-min-1.jpg"
-     },
-     {
-        "id":"Corralejo",
-        "desc":"En la tierra donde nació el cura Hidalgo se encuentra Tequilera Corralejo, ubicada en una bella Hacienda bajo el mismo nombre que se localiza en el municipio de Pénjamo, Guanajuato.",
-        "carac":"El tour en la Hacienda Corralejo se inicia después de leer un letrero que da la bienvenida y refleja la calidad humana de la empresa ofreciendo al visitante satisfacer su curiosidad y expectación acerca de los procesos que se siguen para obtener el tequila.",
-        "foto":"https://tequilacorralejo.mx/assets/base/img/home/slider/slider-corralejo-1.png"
-     }
-  ]
-*/
 
 // GraphQL Schema
 
@@ -100,8 +78,8 @@ const QueryType = new GraphQLObjectType({
       fabricantes: {
           type: new GraphQLList(FabricanteType), // a list of users
           resolve: async () => {
-              var a = await getProducers();
-              return a;
+              var temp = await getProducers();
+              return temp;
           }
       },
       fabricante: {
@@ -117,15 +95,15 @@ const QueryType = new GraphQLObjectType({
            */
           resolve: (user, args) => { 
               //TODO: return fabricante with id == args.id
-              return fabricantes.findOneById(args.id);
+              return a;
           }
       },
       tequilas: {
         type: new GraphQLList(TequilaType), // a list of users
-        resolve: () => {
+        resolve: async () => {
             //TODO: Return a list with all tequilas
-            
-            return this.getTequila();
+            var temp = await getTequilas();
+            return temp;
         }
       },
       tequila: {
@@ -181,6 +159,11 @@ function getTequilaById(tequilaId, callback) {
   })
 }
 // Gets all tequilas in db
+async function getTequilas(callback) {
+  var response = await axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
+  return response.data;
+}
+/*
 function getTequilas(callback) {
   axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
   .then(function (response) {
@@ -192,6 +175,7 @@ function getTequilas(callback) {
     callback(error)
   })
 }
+*/
 function saveTequila(tequilaToAdd, callback) {
   axios.post(process.env.TEQUILA_SVC_URI+'/api/tequila',
   tequilaToAdd)
