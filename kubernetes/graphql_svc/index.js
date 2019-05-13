@@ -123,7 +123,7 @@ const QueryType = new GraphQLObjectType({
           }
       },
       fabricante: {
-          type: TequilaType,
+          type: FabricanteType,
           args: {
               id: {
                   type: new GraphQLNonNull(GraphQLString)

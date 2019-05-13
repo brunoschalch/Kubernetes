@@ -28,6 +28,7 @@ client
         fabricantes{
           id
           desc
+          
         }
       }
     `

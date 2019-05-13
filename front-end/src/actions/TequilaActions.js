@@ -14,7 +14,8 @@ module.exports = {
       tequila: tequila,
     });
     TequilaAPI.get(tequila);
-    //TequilaGQLAPI.get(tequila);
+    
+    TequilaAPI.getGql(tequila);
   },
 
   getFabricante: function(fabricante) {
