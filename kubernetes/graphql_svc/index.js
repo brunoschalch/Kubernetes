@@ -93,9 +93,10 @@ const QueryType = new GraphQLObjectType({
            * parent object as first parameter, and the arguments
            * as second.
            */
-          resolve: (user, args) => { 
+          resolve: async (user, args) => { 
               //TODO: return fabricante with id == args.id
-              return a;
+              var temp = await getProducerById(args.id);
+              return temp;
           }
       },
       tequilas: {
@@ -186,7 +187,11 @@ function saveTequila(tequilaToAdd, callback) {
     console.log(error);
   });
 }
-
+async function getProducerById(producerId, callback) {
+  var response = await axios.get(process.env.PRODUCER_SVC_URI+'/api/producer/'+producerId)
+  return response.data;
+}
+/*
 function getProducerById(producerId, callback) {
   axios.get(process.env.PRODUCER_SVC_URI+'/api/producer/'+producerId)
   .then(function (response) {
@@ -198,6 +203,7 @@ function getProducerById(producerId, callback) {
     callback(error)
   })
 }
+*/
 // Gets all producers in db
 async function getProducers(callback) {
   var response = await axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')

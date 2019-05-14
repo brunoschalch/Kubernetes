@@ -16,7 +16,7 @@ if(DEVMODE) {
 
 // PRODUCER APIS start
 app.get("/api/producer/:producerId", (req, res) => {
-  const producerId = parseInt(req.params.producerId)
+  const producerId = req.params.producerId
   // Make a request to read info!
   axios.get(process.env.PERSISTENCY_SVC_URI+'/api/persistency/producer/'+producerId)
   .then(function (response) {
