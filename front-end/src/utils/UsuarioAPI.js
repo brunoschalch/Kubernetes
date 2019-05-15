@@ -13,20 +13,20 @@ function get(usuario) {
 }
 
 function getGql(usuario){
-  
+
   var client = new ApolloClient({
     uri: "http://localhost:8080/graphql",
     headers:{
-      
+
       authorization: 'joe:password' ,
     }
 
   });
-  
+
     client
       .query({
         query: gql`
-        {    
+        {
           usuario(username: "${usuario}"){
             username
             tequilas{
@@ -35,26 +35,13 @@ function getGql(usuario){
               marca
               desc
             }
-            
+
           }
-          
+
         }
       `
     })
   .then(result => TequilaActionsServer.receiveUsuario(result.data.usuario.tequilas) );
-} 
+}
 
 export  { get, getGql }
-
-/*
-module.exports = {
-  get: function(usuario) {
-    request.get("http://localhost:3006/" + usuario)
-      .set('Accept', 'application/json')
-      .end(function(err, response) {
-        if (err) return console.error(err);
-        TequilaActionsServer.receiveUsuario(response.body);
-      });
-  }
-};
-*/
