@@ -72,6 +72,46 @@ const TequilaType = new GraphQLObjectType({
   }
 });
 
+
+
+
+const TequilaCompadroType = new GraphQLObjectType({ // complex type (with fields)
+  name: 'TequilaComprado',
+  fields: {
+      id :{
+          type: new GraphQLNonNull(GraphQLString) 
+      },
+      f_compra: {
+          type: new GraphQLNonNull(GraphQLString) 
+      },
+      marca: {
+          type: new GraphQLNonNull(GraphQLString) 
+      },
+      desc: {
+        type: new GraphQLNonNull(GraphQLString) 
+    }
+
+      
+  }
+});
+
+const UsuarioType = new GraphQLObjectType({ // complex type (with fields)
+  name: 'Usuario',
+  fields: {
+      username: {
+          type: new GraphQLNonNull(GraphQLString) 
+      },
+      password: {
+          type: new GraphQLNonNull(GraphQLString) 
+      },
+      tequilas: {
+          type: new GraphQLList(TequilaCompadroType)  
+      }
+      
+  }
+});
+
+
 const QueryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
@@ -124,7 +164,27 @@ const QueryType = new GraphQLObjectType({
             return temp;
             
         }
-    },
+      },
+      usuario: {
+        type: UsuarioType,
+        args: {
+            username: {
+                type: new GraphQLNonNull(GraphQLString)
+            }
+        },
+        /* in this notation, the resolver function takes the
+         * parent object as first parameter, and the arguments
+         * as second.
+         */
+        resolve: async(user, args) => { 
+            //TODO: return Tequila with id == args.id
+            var temp = await getUser(args.username);
+            return temp;
+            
+        }
+      },
+   
+    
     
 
   }
@@ -156,36 +216,14 @@ async function getTequilaById(tequilaId, callback) {
   return response.data;
 }
 
-/*
-function getTequilaById(tequilaId, callback) {
-  axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+tequilaId)
-  .then(function (response) {
-    // handle success
-    callback(response.data)
-  })
-  .catch(function (error) {
-    // handle error
-    callback(error)
-  })
-}
-*/
+
 // Gets all tequilas in db
 async function getTequilas(callback) {
   var response = await axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
   return response.data;
 }
 /*
-function getTequilas(callback) {
-  axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
-  .then(function (response) {
-    // handle success
-    callback(response.data)
-  })
-  .catch(function (error) {
-    // handle error
-    callback(error)
-  })
-}
+
 */
 function saveTequila(tequilaToAdd, callback) {
   axios.post(process.env.TEQUILA_SVC_URI+'/api/tequila',
@@ -201,37 +239,19 @@ async function getProducerById(producerId, callback) {
   var response = await axios.get(process.env.PRODUCER_SVC_URI+'/api/producer/'+producerId)
   return response.data;
 }
-/*
-function getProducerById(producerId, callback) {
-  axios.get(process.env.PRODUCER_SVC_URI+'/api/producer/'+producerId)
-  .then(function (response) {
-    // handle success
-    callback(response.data)
-  })
-  .catch(function (error) {
-    // handle error
-    callback(error)
-  })
-}
-*/
+
 // Gets all producers in db
 async function getProducers(callback) {
   var response = await axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')
   return response.data;
 }
-/*
-async function getProducers(callback) {
-  axios.get(process.env.PRODUCER_SVC_URI+'/api/producers')
-  .then(function (response) {
-    // handle success
-    callback(response.data)
-  })
-  .catch(function (error) {
-    // handle error
-    callback(error)
-  })
+
+
+async function getUser(userName, callback) {
+  var response = await axios.get(process.env.USER_SVC_URI+'/api/user/'+userName)
+  return response.data;
 }
-*/
+
 function saveProducer(producerToAdd, callback) {
   axios.post(process.env.PRODUCER_SVC_URI+'/api/producer',
   producerToAdd)
