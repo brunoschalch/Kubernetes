@@ -13,8 +13,8 @@ const {
 const axios = require('axios');
 const app = express()
 
-const DEVMODE = require('../test/debugging');
-//const DEVMODE = false;
+//const DEVMODE = require('../test/debugging');
+const DEVMODE = false;
 
 if(DEVMODE) {
   process.env.PORT = 8080

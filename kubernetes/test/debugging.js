@@ -1,1 +1,1 @@
-module.exports = DEVMODE = true;
+module.exports = DEVMODE = false;

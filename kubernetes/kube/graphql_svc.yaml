@@ -30,6 +30,8 @@ spec:
             value: http://tequila-svc.default.svc.cluster.local
           - name: PRODUCER_SVC_URI
             value: http://producer-svc.default.svc.cluster.local
+          - name: USER_SVC_URI
+            value: http://user-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           protocol: TCP

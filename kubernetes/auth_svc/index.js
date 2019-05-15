@@ -4,7 +4,8 @@ var jwt    = require('jsonwebtoken') // used to create, sign, and verify tokens
 var cors = require('cors')
 const app = express()
 
-const DEVMODE = require('../test/debugging');
+//const DEVMODE = require('../test/debugging');
+const DEVMODE = false;
 
 if(DEVMODE) {
   process.env.PORT = 8086
