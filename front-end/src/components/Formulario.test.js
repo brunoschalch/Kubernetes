@@ -23,6 +23,15 @@ describe('Formulario Tests', () =>{
     expect(wrapper.contains(title)).toEqual(true);
   });
 
+  it('click', () => {
+    const mockCallBack = jest.fn();
+    const button = shallow(<Formulario />);
+    console.log(button.hasClass('container'));
+    expect(button.hasClass('container')).toBe(true);
+    //button.find('typo').simulate('click');
+    //expect(mockCallBack.mock.calls.length).toEqual(1);
+  });
+
   it("always renders three `TextField` elements", () => {
     expect(formulario().find(TextField).length).toBe(3);
   });
