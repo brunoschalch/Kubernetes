@@ -2,7 +2,7 @@ var DEVMODE = require('./debugging');
 var expect = require('chai').expect;
 var request = require('request');
 
-describe('#tequila service', function() {
+describe('#persistency service', function() {
 
   context('DEVMODE is on', function() {
     it('should be true', function() {

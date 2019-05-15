@@ -2,7 +2,7 @@ var DEVMODE = require('./debugging');
 var expect = require('chai').expect;
 var request = require('request');
 
-describe('#tequila service', function() {
+describe('#auth service', function() {
 
   context('DEVMODE is on', function() {
     it('should be true', function() {
@@ -11,19 +11,13 @@ describe('#tequila service', function() {
   })
 
   context('Server is responding', function() {
-  it('Get a user', function(done) {
-    request('http://localhost:8084/api/persistency/user/joe' , function(error, response, body) {
-          expect(response.statusCode).to.equal(200);
+  it('Auth a user, should fail', function(done) {
+    request('http://localhost:8086/api/' , function(error, response, body) {
+          expect(response.statusCode).to.equal(401);
           done();
       });
 });
 
-it('Get a tequila by id', function(done) {
-  request('http://localhost:8084/api/persistency/tequila/104' , function(error, response, body) {
-        expect(response.statusCode).to.equal(200);
-        done();
-    });
-});
 
   })
 
