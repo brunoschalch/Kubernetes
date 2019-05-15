@@ -7,7 +7,6 @@ import FabricanteItem from './components/FabricanteItem';
 import UsuarioItem from './components/UsuarioItem';
 import Footer from './components/Footer';
 
-
 const App = () => (
   <Router>
     <div>

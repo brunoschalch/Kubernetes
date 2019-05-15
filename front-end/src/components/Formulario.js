@@ -51,6 +51,7 @@ class Formulario extends Component {
         .then((responseData) => {
           if (!responseData.ok) {
             localStorage.setItem("token", responseData.yourtoken);
+            localStorage.setItem("name", user);
           }
           this.props.history.push('/tequila/'+number);
           window.location.reload();

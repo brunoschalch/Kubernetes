@@ -102,6 +102,9 @@ class TequilaItem extends React.Component {
           <Button size="small" color="primary" component={Link} to={"/fabricante/"+botella.marca}>
             Ver fabricante
           </Button>
+          <Button size="small" color="primary" component={Link} to={"/usuario/"+localStorage.getItem("name")}>
+            Perfil
+          </Button>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>

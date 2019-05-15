@@ -3,7 +3,6 @@ var TequilaConstants = require('../constants/TequilaConstants');
 var TequilaAPI = require('../utils/TequilaAPI');
 var FabricanteAPI = require('../utils/FabricanteAPI');
 var UsuarioAPI = require('../utils/UsuarioAPI');
-var TequilaGQLAPI = require('../utils/TequilaGQLAPI')
 
 module.exports = {
 
