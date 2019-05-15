@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-const DEVMODE = true;
+const DEVMODE = false;
 
 if(DEVMODE) {
   process.env.PORT = 8084

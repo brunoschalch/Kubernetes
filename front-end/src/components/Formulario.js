@@ -9,6 +9,10 @@ import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
 import './scss/Formulario.scss';
 
+const kubernetesURL = 'http://192.168.99.113:32620/api/graphql';
+//var kubernetesURL = 'http://localhost:8086/';
+
+
 class Formulario extends Component {
   constructor(props) {
 		super(props);
@@ -37,7 +41,7 @@ class Formulario extends Component {
     const value = user + ":" + password;
 
     if (number.length >= 3 && user && password) {
-      fetch("http://localhost:8086/",{
+      fetch(kubernetesURL,{
         method: 'get',
         headers: new Headers({
           'Authorization': value,

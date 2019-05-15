@@ -3,6 +3,9 @@ import ApolloClient from "apollo-boost";
 import TequilaActionsServer from '../actions/TequilaActionsServer';
 import request from 'superagent';
 
+var kubernetesURL = 'http://192.168.99.113:32620/api/graphql';
+//var kubernetesURL = 'http://localhost:8080/graphql';
+
 function get(fabricante) {
   request.get("http://localhost:3005/results/" + fabricante)
       .set('Accept', 'application/json')
@@ -15,10 +18,10 @@ function get(fabricante) {
 function getGql(fabricante){
 
   var client = new ApolloClient({
-    uri: "http://localhost:8080/graphql",
+    uri: kubernetesURL,
     headers:{
 
-      
+
       authorization: localStorage.getItem('token') ,
 
     }

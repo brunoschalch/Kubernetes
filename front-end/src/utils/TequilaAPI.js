@@ -6,6 +6,9 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from "apollo-link-context";
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+var kubernetesURL = 'http://192.168.99.113:32620/api/graphql';
+//var kubernetesURL = 'http://localhost:8080/graphql';
+
 function get(tequila) {
   request.get("http://localhost:3004/results/" + tequila)
     .set('Accept', 'application/json')
@@ -17,9 +20,9 @@ function get(tequila) {
 
 function getGql(tequila){
   var client = new ApolloClient({
-    uri: "http://localhost:8080/graphql",
+    uri: kubernetesURL,
     headers:{
-      
+
       authorization: localStorage.getItem('token') ,
 
     }

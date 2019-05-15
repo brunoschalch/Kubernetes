@@ -22,7 +22,7 @@ spec:
         run: graphql-svc
     spec:
       containers:
-      - image: graphql_svc:v5
+      - image: graphql_svc:v6
         imagePullPolicy: Never
         name: graphql-svc
         env:

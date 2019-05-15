@@ -13,7 +13,7 @@ const {
 const axios = require('axios');
 const app = express()
 
-const DEVMODE = true;
+const DEVMODE = false;
 
 if(DEVMODE) {
   process.env.PORT = 8080
@@ -33,13 +33,13 @@ const FabricanteType = new GraphQLObjectType({ // complex type (with fields)
   name: 'Fabricante',
   fields: {
       id: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       desc: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       carac: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       foto: {
           type: new GraphQLNonNull(GraphQLString)
@@ -47,20 +47,20 @@ const FabricanteType = new GraphQLObjectType({ // complex type (with fields)
   }
 });
 
-const TequilaType = new GraphQLObjectType({ 
+const TequilaType = new GraphQLObjectType({
   name: 'Tequila',
   fields: {
       id: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       marca: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       submarca: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       desc: {
-        type: new GraphQLNonNull(GraphQLString) 
+        type: new GraphQLNonNull(GraphQLString)
       },
       carac: {
         type: new GraphQLList(GraphQLString) //Should be string Array
@@ -79,19 +79,19 @@ const TequilaCompadroType = new GraphQLObjectType({ // complex type (with fields
   name: 'TequilaComprado',
   fields: {
       id :{
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       f_compra: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       marca: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       desc: {
-        type: new GraphQLNonNull(GraphQLString) 
+        type: new GraphQLNonNull(GraphQLString)
     }
 
-      
+
   }
 });
 
@@ -99,15 +99,15 @@ const UsuarioType = new GraphQLObjectType({ // complex type (with fields)
   name: 'Usuario',
   fields: {
       username: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       password: {
-          type: new GraphQLNonNull(GraphQLString) 
+          type: new GraphQLNonNull(GraphQLString)
       },
       tequilas: {
-          type: new GraphQLList(TequilaCompadroType)  
+          type: new GraphQLList(TequilaCompadroType)
       }
-      
+
   }
 });
 
@@ -133,7 +133,7 @@ const QueryType = new GraphQLObjectType({
            * parent object as first parameter, and the arguments
            * as second.
            */
-          resolve: async (user, args) => { 
+          resolve: async (user, args) => {
               //TODO: return fabricante with id == args.id
               var temp = await getProducerById(args.id);
               return temp;
@@ -158,11 +158,11 @@ const QueryType = new GraphQLObjectType({
          * parent object as first parameter, and the arguments
          * as second.
          */
-        resolve: async(user, args) => { 
+        resolve: async(user, args) => {
             //TODO: return Tequila with id == args.id
             var temp = await getTequilaById(args.id);
             return temp;
-            
+
         }
       },
       usuario: {
@@ -176,16 +176,16 @@ const QueryType = new GraphQLObjectType({
          * parent object as first parameter, and the arguments
          * as second.
          */
-        resolve: async(user, args) => { 
+        resolve: async(user, args) => {
             //TODO: return Tequila with id == args.id
             var temp = await getUser(args.username);
             return temp;
-            
+
         }
       },
-   
-    
-    
+
+
+
 
   }
 });
