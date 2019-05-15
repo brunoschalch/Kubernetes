@@ -30,4 +30,12 @@ describe('Formulario Tests', () =>{
   it("always renders a Button element", () => {
     expect(formulario().find(Button).length).toBe(1);
   });
+
+  it("always renders nine divs", () => {
+    expect(formulario().find("div").length).toBe(9);
+  });
+
+  it("always renders one form", () => {
+    expect(formulario().find("form").length).toBe(1);
+  });
 })

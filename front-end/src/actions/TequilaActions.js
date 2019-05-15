@@ -13,8 +13,6 @@ module.exports = {
       actionType: TequilaConstants.GET_TEQUILA,
       tequila: tequila,
     });
-    //TequilaAPI.get(tequila);
-    
     TequilaAPI.getGql(tequila);
   },
 
@@ -24,7 +22,6 @@ module.exports = {
       actionType: TequilaConstants.GET_FABRICANTE,
       fabricante: fabricante,
     });
-    //FabricanteAPI.get(fabricante);
     FabricanteAPI.getGql(fabricante);
   },
 
@@ -34,8 +31,6 @@ module.exports = {
       actionType: TequilaConstants.GET_USUARIO,
       fabricante: usuario,
     });
-    //UsuarioAPI.get(usuario);
     UsuarioAPI.getGql(usuario);
   },
-
 };
