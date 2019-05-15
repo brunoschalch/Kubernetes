@@ -45,7 +45,7 @@ jwt.verify(token, 'superSecretBSG', function(err, decoded) {
               if (result.username && result.password) {
                 // User found! now generate token
                 var token = jwt.sign(result, 'superSecretBSG', {
-                  expiresIn: 60*60*12// expires in 12 hours
+                  expiresIn: 60*10// expires in 10 minutes
                 });
 
                 res.status(401).json({

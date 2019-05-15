@@ -5,7 +5,10 @@ var kubernetesURL = 'http://192.168.99.113:32620/api/graphql';
 //var kubernetesURL = 'http://localhost:8080/graphql';
 
 const client = new ApolloClient({
-  uri: kubernetesURL
+  uri: kubernetesURL,
+  headers:{
+    authorization: localStorage.getItem('token') ,
+  }
 });
 
 client
