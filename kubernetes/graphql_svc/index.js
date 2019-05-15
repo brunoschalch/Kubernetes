@@ -292,6 +292,3 @@ port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`graphql_svc listening on ${port}`)
 })
-
-// Export our app for testing purposes
-export default app;
