@@ -101,6 +101,15 @@ metadata:
   labels:
     service: ambassador
   name: ambassador
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: Module
+      name: ambassador
+      config:
+        cors:
+          origins: "*"
 spec:
   type: LoadBalancer
   ports:

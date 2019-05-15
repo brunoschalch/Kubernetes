@@ -22,7 +22,7 @@ spec:
         run: graphql-svc
     spec:
       containers:
-      - image: graphql_svc:v4
+      - image: graphql_svc:v5
         imagePullPolicy: Never
         name: graphql-svc
         env:
@@ -55,8 +55,8 @@ metadata:
       apiVersion: ambassador/v0
       kind:  Mapping
       name:  graphql-svc_mapping
-      prefix: /graphql/
-      rewrite: /api/graphql/
+      prefix: /api/
+      rewrite: /
       service: graphql-svc
 spec:
   ports:
