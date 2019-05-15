@@ -26,17 +26,22 @@ function getGql(usuario){
     client
       .query({
         query: gql`
-        {
-          fabricante(id : "${usuario} "){
-            id
-            desc
-            carac
-            foto
+        {    
+          usuario(username: "${usuario}"){
+            username
+            tequilas{
+              id
+              f_compra
+              marca
+              desc
+            }
+            
           }
+          
         }
       `
     })
-  .then(result =>  TequilaActionsServer.receiveFabricante(result.data.usuario));
+  .then(result => TequilaActionsServer.receiveUsuario(result.data.usuario.tequilas) );
 } 
 
 export  { get, getGql }

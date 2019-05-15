@@ -34,7 +34,8 @@ module.exports = {
       actionType: TequilaConstants.GET_USUARIO,
       fabricante: usuario,
     });
-    UsuarioAPI.get(usuario);
+    //UsuarioAPI.get(usuario);
+    UsuarioAPI.getGql(usuario);
   },
 
 };
