@@ -36,7 +36,7 @@ function getGql(tequila){
     uri: "http://localhost:8080/graphql",
     headers:{
       
-      authorization: 'joe:password' ,
+      authorization: localStorage.getItem('token') ,
     }
     //link: authLink.concat(httpLink),
     //cache: new InMemoryCache()

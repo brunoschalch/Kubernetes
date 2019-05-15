@@ -18,7 +18,7 @@ function getGql(usuario){
     uri: "http://localhost:8080/graphql",
     headers:{
       
-      authorization: 'joe:password' ,
+      authorization: localStorage.getItem('token'),
     }
 
   });
