@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 
 //const DEVMODE = require('../test/debugging');
-const DEVMODE = false;
+const DEVMODE = true;
 
 if(DEVMODE) {
   process.env.PORT = 8084

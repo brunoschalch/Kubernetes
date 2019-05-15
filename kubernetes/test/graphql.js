@@ -11,9 +11,9 @@ describe('#graphql main service', function() {
   })
 
   context('Server is responding', function() {
-  it('Get graphql client', function(done) {
+  it('Get graphql client, should be 400', function(done) {
     request('http://localhost:8080/graphql' , function(error, response, body) {
-          expect(response.statusCode).to.equal(200);
+          expect(response.statusCode).to.equal(400);
           done();
       });
 });
