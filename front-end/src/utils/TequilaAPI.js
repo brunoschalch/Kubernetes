@@ -46,14 +46,18 @@ function getGql(tequila){
       .query({
         query: gql`
         {
-          fabricantes{
+          tequila(id : "${tequila} "){
             id
+            marca
+            submarca
             desc
+            carac
+            foto
           }
         }
       `
     })
-  .then(result => console.log(result.data));
+  .then(result =>  TequilaActionsServer.receiveTequila(result.data.tequila));
 } 
 
 export  { get, getGql }

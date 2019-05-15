@@ -13,7 +13,7 @@ module.exports = {
       actionType: TequilaConstants.GET_TEQUILA,
       tequila: tequila,
     });
-    TequilaAPI.get(tequila);
+    //TequilaAPI.get(tequila);
     
     TequilaAPI.getGql(tequila);
   },
