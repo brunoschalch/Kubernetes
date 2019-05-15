@@ -24,7 +24,8 @@ module.exports = {
       actionType: TequilaConstants.GET_FABRICANTE,
       fabricante: fabricante,
     });
-    FabricanteAPI.get(fabricante);
+    //FabricanteAPI.get(fabricante);
+    FabricanteAPI.getGql(fabricante);
   },
 
   getUsuario: function(usuario) {
