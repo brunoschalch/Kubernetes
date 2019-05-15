@@ -33,4 +33,4 @@ client
       }
     `
   })
-  .then(result => console.log(result.data));
+  .then(/*result => console.log(result.data)*/);
