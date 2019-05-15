@@ -34,10 +34,29 @@ class Formulario extends Component {
     const number = this.state.serial;
     const user = this.state.user;
     const password = this.state.password;
+    const value = user + ":" + password;
+
     if (number.length >= 3 && user && password) {
-      console.log(number);
-      this.props.history.push('/tequila/'+number);
-      window.location.reload();
+      fetch("http://localhost:8086/",{
+        method: 'get',
+        headers: new Headers({
+          'Authorization': value,
+          'Content-type': 'application/json'
+        })
+      }).then((response) => response.json())
+        .then((responseData) => {
+          if (!responseData.ok) {
+            localStorage.setItem("token", responseData.yourtoken);
+            //console.log(localStorage.getItem("token"));
+          }
+          this.props.history.push('/tequila/'+number);
+          window.location.reload();
+          console.log(localStorage.getItem("token"));
+        })
+        .catch((error) => console.error(error));
+    }
+    else {
+      window.alert("Please fill out all the inputs.");
     }
   }
 
