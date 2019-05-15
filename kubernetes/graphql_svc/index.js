@@ -118,9 +118,11 @@ const QueryType = new GraphQLObjectType({
          * parent object as first parameter, and the arguments
          * as second.
          */
-        resolve: (user, args) => { 
+        resolve: async(user, args) => { 
             //TODO: return Tequila with id == args.id
-            return fabricantes.findOneById(args.id);
+            var temp = await getTequilaById(args.id);
+            return temp;
+            
         }
     },
 
@@ -148,6 +150,12 @@ app.get("/api/graphql/:id", async (req, res, next) => {
 // Make a request for a user with a given ID
 //axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+id)
 
+async function getTequilaById(tequilaId, callback) {
+  var response = await axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+tequilaId)
+  return response.data;
+}
+
+/*
 function getTequilaById(tequilaId, callback) {
   axios.get(process.env.TEQUILA_SVC_URI+'/api/tequila/'+tequilaId)
   .then(function (response) {
@@ -159,6 +167,7 @@ function getTequilaById(tequilaId, callback) {
     callback(error)
   })
 }
+*/
 // Gets all tequilas in db
 async function getTequilas(callback) {
   var response = await axios.get(process.env.TEQUILA_SVC_URI+'/api/tequilas')
