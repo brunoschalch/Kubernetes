@@ -3,7 +3,7 @@ const moment = require("moment")
 const axios = require('axios')
 const app = express()
 
-const DEVMODE = false;
+const DEVMODE = require('../test/debugging');
 
 if(DEVMODE) {
   process.env.PORT = 8085

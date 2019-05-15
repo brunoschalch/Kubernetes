@@ -1,0 +1,21 @@
+{
+  "name": "kubertests",
+  "version": "1.0.0",
+  "description": "mocha and chai",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "nyc": "^14.1.1"
+  },
+  "devDependencies": {
+    "request": "^2.88.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
