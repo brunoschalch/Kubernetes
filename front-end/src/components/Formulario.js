@@ -51,16 +51,14 @@ class Formulario extends Component {
         .then((responseData) => {
           if (!responseData.ok) {
             localStorage.setItem("token", responseData.yourtoken);
-            //console.log(localStorage.getItem("token"));
           }
           this.props.history.push('/tequila/'+number);
           window.location.reload();
-          console.log(localStorage.getItem("token"));
         })
         .catch((error) => console.error(error));
     }
     else {
-      window.alert("Please fill out all the inputs.");
+      //window.alert("Please fill out all the inputs.");
     }
   }
 

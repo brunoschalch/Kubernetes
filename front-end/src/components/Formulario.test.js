@@ -25,11 +25,11 @@ describe('Formulario Tests', () =>{
 
   it('click', () => {
     const mockCallBack = jest.fn();
-    const button = shallow(<Formulario />);
-    console.log(button.hasClass('container'));
-    expect(button.hasClass('container')).toBe(true);
-    //button.find('typo').simulate('click');
-    //expect(mockCallBack.mock.calls.length).toEqual(1);
+    formulario().setState({ user: 'joe' });
+    formulario().setState({ password: 'password' });
+    formulario().setState({ serial: '101' });
+    formulario().find(Button).simulate('click');
+    expect(formulario().state('serial')).toBe('101')
   });
 
   it("always renders three `TextField` elements", () => {
