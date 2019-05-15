@@ -1,6 +1,7 @@
 const express = require("express")
 const axios = require('axios')
 var jwt    = require('jsonwebtoken') // used to create, sign, and verify tokens
+var cors = require('cors')
 const app = express()
 
 const DEVMODE = true;
@@ -31,7 +32,7 @@ function loginUser(loginInfo, callback) {
   })
 }
 
-app.use((req, res) => {
+app.use(cors(), (req, res) => {
 
   let token = req.get('authorization')
 // Check if token is valid
