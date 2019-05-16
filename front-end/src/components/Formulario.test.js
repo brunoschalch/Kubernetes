@@ -23,11 +23,28 @@ describe('Formulario Tests', () =>{
     expect(wrapper.contains(title)).toEqual(true);
   });
 
+  it('click', () => {
+    const mockCallBack = jest.fn();
+    formulario().setState({ user: 'joe' });
+    formulario().setState({ password: 'password' });
+    formulario().setState({ serial: '101' });
+    formulario().find(Button).simulate('click');
+    expect(formulario().state('serial')).toBe('101')
+  });
+
   it("always renders three `TextField` elements", () => {
     expect(formulario().find(TextField).length).toBe(3);
   });
 
   it("always renders a Button element", () => {
     expect(formulario().find(Button).length).toBe(1);
+  });
+
+  it("always renders nine divs", () => {
+    expect(formulario().find("div").length).toBe(9);
+  });
+
+  it("always renders one form", () => {
+    expect(formulario().find("form").length).toBe(1);
   });
 })

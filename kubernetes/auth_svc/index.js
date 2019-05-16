@@ -1,8 +1,10 @@
 const express = require("express")
 const axios = require('axios')
 var jwt    = require('jsonwebtoken') // used to create, sign, and verify tokens
+var cors = require('cors')
 const app = express()
 
+//const DEVMODE = require('../test/debugging');
 const DEVMODE = true;
 
 if(DEVMODE) {
@@ -31,7 +33,7 @@ function loginUser(loginInfo, callback) {
   })
 }
 
-app.use((req, res) => {
+app.use(cors(), (req, res) => {
 
   let token = req.get('authorization')
 // Check if token is valid
@@ -44,7 +46,7 @@ jwt.verify(token, 'superSecretBSG', function(err, decoded) {
               if (result.username && result.password) {
                 // User found! now generate token
                 var token = jwt.sign(result, 'superSecretBSG', {
-                  expiresIn: 60*60*12// expires in 12 hours
+                  expiresIn: 60*10// expires in 10 minutes
                 });
 
                 res.status(401).json({

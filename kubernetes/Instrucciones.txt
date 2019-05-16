@@ -42,8 +42,8 @@ opcional y util en otra pestaña: minikube dashboard
 eval $(minikube docker-env)
 
 3)
-docker build -t graphql_svc:v4 ./graphql_svc
-docker build -t auth_svc:v7 ./auth_svc
+docker build -t graphql_svc:v6 ./graphql_svc
+docker build -t auth_svc:v8 ./auth_svc
 docker build -t tequila_svc:v4 ./tequila_svc
 docker build -t producer_svc:v1 ./producer_svc
 docker build -t user_svc:v1 ./user_svc
@@ -59,7 +59,7 @@ minikube service ambassador --url
 
 6)
 // sustituir IP del paso anterior.
-curl http://192.168.99.111:32745/graphql/tequila/45 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.112:30921/api/graphql/tequila/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 // FONT END: en lugar de curl, acá se hacen las requests.
 

@@ -4,9 +4,12 @@ var bodyParser = require("body-parser")
 
 const app = express()
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+//const DEVMODE = require('../test/debugging');
 const DEVMODE = true;
 
 if(DEVMODE) {

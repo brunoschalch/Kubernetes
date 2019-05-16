@@ -9,6 +9,10 @@ import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
 import './scss/Formulario.scss';
 
+var kubernetesURL = 'http://192.168.99.115:30568/api/graphql';
+//var kubernetesURL = 'http://localhost:8086/';
+
+
 class Formulario extends Component {
   constructor(props) {
 		super(props);
@@ -34,10 +38,28 @@ class Formulario extends Component {
     const number = this.state.serial;
     const user = this.state.user;
     const password = this.state.password;
+    const value = user + ":" + password;
+
     if (number.length >= 3 && user && password) {
-      console.log(number);
-      this.props.history.push('/tequila/'+number);
-      window.location.reload();
+      fetch(kubernetesURL,{
+        method: 'get',
+        headers: new Headers({
+          'Authorization': value,
+          'Content-type': 'application/json'
+        })
+      }).then((response) => response.json())
+        .then((responseData) => {
+          if (!responseData.ok) {
+            localStorage.setItem("token", responseData.yourtoken);
+            localStorage.setItem("name", user);
+          }
+          this.props.history.push('/tequila/'+number);
+          window.location.reload();
+        })
+        .catch((error) => console.error(error));
+    }
+    else {
+      //window.alert("Please fill out all the inputs.");
     }
   }
 

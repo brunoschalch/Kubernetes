@@ -3,6 +3,7 @@ const moment = require("moment")
 const axios = require('axios')
 const app = express()
 
+//const DEVMODE = require('../test/debugging');
 const DEVMODE = true;
 
 if(DEVMODE) {

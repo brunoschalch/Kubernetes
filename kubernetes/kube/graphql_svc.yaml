@@ -22,7 +22,7 @@ spec:
         run: graphql-svc
     spec:
       containers:
-      - image: graphql_svc:v4
+      - image: graphql_svc:v6
         imagePullPolicy: Never
         name: graphql-svc
         env:
@@ -30,6 +30,8 @@ spec:
             value: http://tequila-svc.default.svc.cluster.local
           - name: PRODUCER_SVC_URI
             value: http://producer-svc.default.svc.cluster.local
+          - name: USER_SVC_URI
+            value: http://user-svc.default.svc.cluster.local
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -55,8 +57,8 @@ metadata:
       apiVersion: ambassador/v0
       kind:  Mapping
       name:  graphql-svc_mapping
-      prefix: /graphql/
-      rewrite: /api/graphql/
+      prefix: /api/
+      rewrite: /
       service: graphql-svc
 spec:
   ports:

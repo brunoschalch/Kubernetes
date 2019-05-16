@@ -19,8 +19,10 @@ class TequilaItem extends React.Component {
     this.state = {
       expanded: false,
       id: '',
-      list: TequilaStore.getList()
+      list: TequilaStore.getList(),
+      readyToDisp: false,
     };
+
     this._onChange = this._onChange.bind(this);
   }
 
@@ -31,10 +33,14 @@ class TequilaItem extends React.Component {
     if (tequila) {
       this.search(tequila);
     }
+
   }
 
   componentWillMount() {
 		TequilaStore.addChangeListener(this._onChange);
+    setTimeout(()=>{ this.setState({
+      readyToDisp: true
+    }); }, 3000);
 	}
 
 	componentWillUnmount() {
@@ -66,6 +72,8 @@ class TequilaItem extends React.Component {
       idBotella = this.props.match.params.id;
     }
 
+    console.log("the list for condition:")
+    console.log(this.state.list)
     if (this.state.list.list[0]){
       botella = this.state.list.list[0];
       botella.carac.map(function(item, index) {
@@ -74,8 +82,7 @@ class TequilaItem extends React.Component {
         );
       });
       foto = botella.foto;
-    }
-    else {
+    } else if (this.state.readyToDisp) {
       return <WrongItem cause="No se encontró el tequila"
       desc="El tequila es falso, no está registrado o la información no es correcta"/>
     }
@@ -101,6 +108,9 @@ class TequilaItem extends React.Component {
           </Button>
           <Button size="small" color="primary" component={Link} to={"/fabricante/"+botella.marca}>
             Ver fabricante
+          </Button>
+          <Button size="small" color="primary" component={Link} to={"/usuario/"+localStorage.getItem("name")}>
+            Perfil
           </Button>
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>

@@ -1,13 +1,34 @@
-var TequilaActionsServer = require('../actions/TequilaActionsServer');
-var request = require('superagent');
+import TequilaActionsServer from '../actions/TequilaActionsServer';
+import { gql } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 
-module.exports = {
-  get: function(tequila) {
-    request.get("http://localhost:3004/results/" + tequila)
-      .set('Accept', 'application/json')
-      .end(function(err, response) {
-        if (err) return console.error(err);
-        TequilaActionsServer.receiveTequila(response.body);
-      });
-  }
-};
+var kubernetesURL = 'http://192.168.99.115:30568/api/graphql';
+//var kubernetesURL = 'http://localhost:8080/graphql';
+
+function getGql(tequila){
+  var client = new ApolloClient({
+    uri: kubernetesURL,
+    headers:{
+      authorization: localStorage.getItem('token') ,
+    }
+  });
+
+    client
+      .query({
+        query: gql`
+        {
+          tequila(id : "${tequila} "){
+            id
+            marca
+            submarca
+            desc
+            carac
+            foto
+          }
+        }
+      `
+    })
+  .then(result =>  TequilaActionsServer.receiveTequila(result.data.tequila));
+}
+
+export  { getGql }

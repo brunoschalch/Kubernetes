@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
+//import CircularProgress from '@material-ui/core/CircularProgress';
 import './scss/WrongItem.scss';
 
 class WrongItem extends React.Component {
@@ -16,6 +17,10 @@ class WrongItem extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  componentDidMount(){
+
+  }
 
   render() {
     const {cause, desc} = this.props;
