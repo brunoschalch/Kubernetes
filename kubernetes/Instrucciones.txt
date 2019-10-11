@@ -59,9 +59,15 @@ minikube service ambassador --url
 
 6)
 // sustituir IP del paso anterior.
-curl http://192.168.99.112:30921/api/graphql/tequila/45 -H 'authorization: letmeinpleasekthxbye'
+curl http://192.168.99.116:31174/api/graphql/tequila/45 -H 'authorization: letmeinpleasekthxbye'
 // Este comando hay que intentarlo más de una vez a veces! aguasss también en front end. No sé si es culpa de curl o que el servidor no está tan cool.
 // FONT END: en lugar de curl, acá se hacen las requests.
+
+curl http://192.168.99.116:31174/api/user/login/test:testpass
+
+curl http://192.168.99.116:31174/api/graphql/tequila/45 -H 'authorization: joe:password'
+
+
 
 7)
 al final, apagar con minikube stop o minikube delete

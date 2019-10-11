@@ -5,7 +5,7 @@ var cors = require('cors')
 const app = express()
 
 //const DEVMODE = require('../test/debugging');
-const DEVMODE = true;
+const DEVMODE = false;
 
 if(DEVMODE) {
   process.env.PORT = 8086
